@@ -9,4 +9,7 @@ echo '</br>';
 echo $arr[2];
 echo '</br>';
 $arr=['a', 'b', 'c', 'd'];
+echo $arr[0] . '+' . $arr [1];
+echo '</br>';
+echo $arr[2] . '+' . $arr [3];
 ?>
