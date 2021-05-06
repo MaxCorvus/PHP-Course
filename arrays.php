@@ -7,7 +7,7 @@ echo "<br>";
 $arr1 = ['a'=>1, 'b'=>2, 'c'=>3];
 echo $sum = $arr['a']+$arr['b']+$arr['c'];
 echo "<br>";
-
+//ghgh
 //OR
 echo array_sum ($arr1);
 echo "<br>";
