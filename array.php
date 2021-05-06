@@ -51,4 +51,6 @@ $arr1[3]=4;
 $arr1[4]=5;
 var_dump ($arr1);
 
+// lala
+
 ?>
