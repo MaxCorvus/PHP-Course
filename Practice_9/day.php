@@ -13,13 +13,12 @@ public string $fullDate;
         $this->fullDate = date('d-m-Y', $currentTimestamp);
     }
 
-    function selectedDay()
+    public function ShowSelectedDay()
     {
-
         echo "The day is $this->dayOfWeek - $this->fullDate";
     }
 }
  $day = isset($_GET['dayOfMonth']) ? (int) $_GET['dayOfMonth'] : (int) date('d');
 
-$object = new Day($day);
-$object->selectedDay();
+$currentDay = new Day($day);
+$currentDay->ShowSelectedDay();
