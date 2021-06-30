@@ -1,44 +1,73 @@
-<table>
-
-
 <?php
-$year = date ('Y');
-$month = date ('n');
-$daysInMonth = cal_days_in_month (CAL_GREGORIAN, $month, $year);
-$firstDayOfMonthTimestamp = mktime(0, 0, 0, $month, 1, $year);
-$dayOfWeek = date('w', $firstDayOfMonthTimestamp);
-echo '<tr>';
-$week = [
-    'Sun',
-    'Mon', 
-    'Tue', 
-    'Wed', 
-    'Thu', 
-    'Fri', 
-    'Sat'  
-];
+class Month {
+    private int $daysInMonth;
+    private string $dayOfWeek;
 
-foreach ($week as $index => $dayName) {
-    
-    echo "<td>$dayName</td>";
-}
+    public array $week = [
+        'Sun',
+        'Mon', 
+        'Tue', 
+        'Wed', 
+        'Thu', 
+        'Fri', 
+        'Sat'  
+    ];
 
-   
+    function __construct(string $year, string $month)
+    {
+        $this->daysInMonth = cal_days_in_month (CAL_GREGORIAN, $month, $year);
+        $this->dayOfWeek = date('w', mktime(0, 0, 0, $month, 1, $year));
+    }
 
-echo "</tr><tr>";
+    public function handle()
+    {
+        echo '<table>';
 
-for ($i = 0; $i < $dayOfWeek; $i++) {
-    echo "<td></td>";
-}
+        $this->echoTitles();
+        $this->echoDays();
+
+        echo '</table>';
+    }
+
+    public function echoTitles()
+    {
+        echo '<tr>';
+
+        foreach ($this->week as $index => $dayName) 
+        {
+
+            echo "<td>$dayName</td>";
+        }
+
+        echo '</tr>';
+    }
+
+    public function echoDays()
+    {
+        echo "<tr>";
+
+        $this->makeIndent();
+
+        for ($day = 1; $day <= $this->daysInMonth; $day++) {
+            echo "<td><a href = day?dayOfMonth=$day>$day</a></td>";
+
+            if (($day + $this->dayOfWeek) % 7 === 0) {
+                echo "</tr><tr>";
+            }
+        }
+
+        echo '</tr>';
+    }
 
 
-for ($day = 1; $day <= $daysInMonth; $day++) {
-    echo "<td><a href = day?dayOfMonth=$day>$day</a></td>";
-    if (($day + $dayOfWeek) % 7 === 0) {
-         echo "</tr><tr>";
+    private function makeIndent()
+    {
+        for ($i = 0; $i < $this->dayOfWeek; $i++) 
+        {
+            echo "<td></td>";
+        }
     }
 }
-echo '</tr>';
-?>
 
-</table>
+$month = new Month(date('Y'), date('n'));
+$month->handle();
