@@ -1,7 +1,7 @@
 <?php
 class ATM{
-    public $user;
-    public $pin;
+    private $user;
+    private $pin;
     private array $userInfos = [
         1111 => [
             'name' => 'Vasya',
@@ -21,7 +21,7 @@ class ATM{
     ];
 
  
-   public  function isUserExists($user) {
+   public  function isUserExists(string $user) {
        $this->user = $user;
        foreach ($this->userInfos as $id => $value){
            if ($value['name'] === $user) {
@@ -32,7 +32,7 @@ class ATM{
 
        return false;       
   }
-  public function checkPin($pin){
+  public function checkPin(int $pin){
     
     
     foreach ($this->userInfos as $id=>$value)
@@ -51,7 +51,7 @@ class ATM{
     }
 
     }
-    public function makeMoney($requiredAmount){
+    public function makeMoney(int $requiredAmount){
         foreach ($this->userInfos as $id=>$value){
         if ($this->user === $value['name']){
             if ($this->pin === $value['pin']){
